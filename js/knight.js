@@ -38,7 +38,7 @@ const KNIGHT_CHARACTER = {
             "Galoppino ist bereit! *unterdrücktes Pupsen* FAST bereit! 😅💨"
         ],
 
-        // After making a move (40 messages)
+        // After making a move (80 messages)
         move: [
             "*hüpf* Perfekt! Ein Pferdeapfel zurückgelassen! 💩",
             "So macht man das! *prrt* Entschuldigung, das passiert bei L-Sprüngen... 💨",
@@ -79,12 +79,53 @@ const KNIGHT_CHARACTER = {
             "YEEHAW! *sofortiges Unbehagen* 🤠😰",
             "Und wieder einer! *verzweifelte Bauchklammer* 😫",
             "*spring* Mein Motto: Erst springen, dann... naja! 🎯💨",
-            "Galoppierender Wahnsinn! Und galoppierendes anderes Zeug! 🌀💨"
+            "Galoppierender Wahnsinn! Und galoppierendes anderes Zeug! 🌀💨",
+            // 40 neue Sprüche
+            "*BOING* Wie ein Flummi! Ein Flummi mit Blähungen! 🏀💨",
+            "Feld erobert! Territorium markiert! *stolzes Pupsen* 🚩💩",
+            "Das war ein Bilderbuch-Sprung! Das Ende war ein Bilderbuch-Pups! 📖💨",
+            "*hoppla* Beinahe wär was passiert! Also... MEHR passiert! 😅💨",
+            "Zwei-eins! Zack! *brrrpt* Ups, Nachbeben! 📐💨",
+            "Ich bin UNAUFHALTSAM! Wie meine Verdauung! 💪💩",
+            "*elegant spring* Grazie! Eleganz! *PFFFT* ...Peinlichkeit! 🩰💨",
+            "Felder fallen vor mir! Andere Dinge auch! 👑💨",
+            "Noch einer drauf! *presst alles zusammen* Buchstäblich! 😬💩",
+            "SPRUNG! LANDUNG! *EXPLOSION* ...Akustisch gemeint! 💥💨",
+            "*hippity hoppity* Dieses Feld ist jetzt mein Property! 🏠💩",
+            "Wie geschmiert! Leider auch woanders! 🛢️💨",
+            "Der perfekte Zug! Der imperfekte Magen! ♟️😰",
+            "*bounce* Federleicht! *prrt* Federleicht war das NICHT! 🪶💨",
+            "Schritt für Schritt zum Ziel! Pups für Pups auch! 👣💨",
+            "Ich tanze über das Brett! Mit gewissen... Nebengeräuschen! 💃💨",
+            "*ZACK* Da bin ich! *PRRT* Da war noch was! ⚡💨",
+            "Dieses Feld gehört GALOPPINO! Für immer! Riecht auch so! 👃💩",
+            "Weiter gehts! Keine Zeit! Kein Halten! NIRGENDS! 🏃‍♂️💨",
+            "*spring spring* Doppelt hält besser! *pff pff* Doppelt pupst auch! 💨💨",
+            "Sieg auf ganzer Linie! Niederlage auf Bauch-Linie! 📏😰",
+            "Der Ritter reitet! Der Ritter leidet! Aber WEITER! 🛡️💨",
+            "*majestätisch spring* So macht man das! *peinlich pups* So eher nicht! 👑💨",
+            "Feld Nummer WOW! Darm-Status: ALARM! 🚨😱",
+            "Ein Held braucht Felder! Ein Held braucht auch ein WC! 🦸💩",
+            "*geschmeidig hüpf* Wie eine Gazelle! Eine blähende Gazelle! 🦌💨",
+            "Progress! Fortschritt! *BRUMM* ...auch hinten Fortschritt! 📈💨",
+            "Das Brett zittert vor mir! Mein Bauch zittert vor dem Brett! 🌋😰",
+            "*triumphaler Sprung* JA! *triumphaler Furz* ...weniger JA! 🎉💨",
+            "Immer weiter! Niemals aufgeben! *verzweifelt klammern* NIEMALS! 💪😬",
+            "Ich bin der MEISTER! Der Meister des... *PRRRT* ...egal! 🏆💨",
+            "Feld besetzt! Feld bestinkt! Feld MEINS! 🏴‍☠️💩",
+            "*professionell spring* Jahre des Trainings! *unprofessionell pups* Jahre des Essens! 🎓💨",
+            "Ein Schritt näher! Ein Pups lauter! Das ist der Deal! 🤝💨",
+            "*schwungvoll hüpf* Mit STIL! *peinlich entweich* Mit... weniger Stil! ✨💨",
+            "Wie ein Uhrwerk! Tick-tack-PRRRT-tick-tack! ⏰💨",
+            "Feldherrschaft AKTIVIERT! Darmherrschaft DEAKTIVIERT! 🎮😰",
+            "*akrobatisch spring* Zirkusreif! *laut entweich* Manege frei! 🎪💨",
+            "Der Weg zum WC führt über alle Felder! ALLE! 🗺️🚽",
+            "*flink hüpf* Schnell wie der Wind! Riecht auch so! 🌬️💨"
         ],
 
         // When stuck (no valid moves) (30 messages with clever wordplay)
         stuck: [
-            "💩 Eingeklemmt! Jetzt sitzt nicht nur SIR fest... 😅",
+            "💩 Sackgasse! Und mein Hintern kennt keine Sackgassen! 😱💨",
             "Oh nein! Ich stecke fest! ...Genau wie meine Verdauung NICHT! 😱💨",
             "Eingesperrt! Jetzt hab ich vor Schreck in die Rüstung... nein, keine Details! 🙈",
             "Game Over! Wenigstens kann ich jetzt endlich zur Toilette! 🏃‍♂️🚽",
