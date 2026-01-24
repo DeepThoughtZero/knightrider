@@ -155,8 +155,10 @@ class KnightRiderUI {
 
         // If game not started, this is start position selection
         if (!this.isGameStarted) {
-            if (this.game.isObstacle(col, row)) {
-                this.setKnightSpeech(getKnightMessage('nearPond'));
+            const obstacleType = this.game.getObstacleType(col, row);
+            if (obstacleType) {
+                const msgType = obstacleType === 'pond' ? 'blockPond' : 'blockWolf';
+                this.setKnightSpeech(getKnightMessage(msgType));
                 this.sounds.playInvalid();
                 return;
             }
@@ -178,10 +180,23 @@ class KnightRiderUI {
             return;
         }
 
-        // Normal move
+        // Normal move - check why it's invalid
         if (!this.isValidMoveTarget(col, row)) {
             this.sounds.playInvalid();
             this.shakeCell(col, row);
+
+            // Show specific message based on what's blocking
+            const obstacleType = this.game.getObstacleType(col, row);
+            if (obstacleType === 'pond') {
+                this.setKnightSpeech(getKnightMessage('blockPond'));
+            } else if (obstacleType === 'wolf') {
+                this.setKnightSpeech(getKnightMessage('blockWolf'));
+            } else if (this.game.isVisited(col, row)) {
+                this.setKnightSpeech(getKnightMessage('blockVisited'));
+            } else {
+                // Not reachable by L-shaped move
+                this.setKnightSpeech(getKnightMessage('blockNotL'));
+            }
             return;
         }
 

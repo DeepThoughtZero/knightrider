@@ -14,7 +14,27 @@
 
 *Der kleine Ritter hat etwas Falsches gegessen und muss DRINGEND aufs Klo...*
 
+![Knight Rider Preview](KnightRiderPreview.png)
+
 </div>
+
+---
+
+## 📖 Die Geschichte
+
+Es war einmal ein tapferer Ritter namens **Sir Galoppino** 🐴
+
+Eines schicksalhaften Morgens aß er beim Frühstück einen verdächtig riechenden **Bohneneintopf**. Sein Magen begann zu grummeln. Dann zu beben. Dann zu REBELLIEREN! 🫘💨
+
+Nun muss Sir Galoppino über das gesamte Schachbrett springen, um die **goldene Toilette** 🚽✨ am Ende zu erreichen. Doch der Weg ist voller Gefahren:
+
+- 🌊 **Die Teiche** - Sir Galoppino HASST Wasser! Nasses Fell klebt am Körper und stinkt tagelang!
+- 🐺 **Die Wölfe** - Sie können Pferde riechen! Und Galoppino riecht gerade... besonders intensiv! 
+- 💩 **Seine eigenen Hinterlassenschaften** - Das Schlimmste von allem! Bei jedem Sprung hinterlässt er einen Pferdeapfel. Und wehe, er tritt hinein! Die Demütigung! DIE DEMÜTIGUNG! 😱
+
+Besuche alle 58 freien Felder, ohne ein Feld doppelt zu betreten - dann erreicht Sir Galoppino endlich sein Ziel und kann... sich **ERLEICHTERN**! 🎉🚽💨
+
+*Schaffst du es, bevor es zu spät ist?*
 
 ---
 

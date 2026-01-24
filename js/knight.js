@@ -187,6 +187,62 @@ const KNIGHT_CHARACTER = {
             "Gefährliche Bestie! Aber mein Hintern ist gefährlicher! 💣🐺"
         ],
 
+        // Can't enter pond - explains why (10 messages)
+        blockPond: [
+            "NEIN! Da ist WASSER! Ich kann nicht schwimmen! *panisch* 🌊😱",
+            "Ins Wasser?! Mit meiner Verdauung?! Das Ökosystem würde sterben! 🌊💀",
+            "ICH HASSE WASSER! Pferde + Wasser = NEIN! 🐴🚫🌊",
+            "Der Teich ist TABU! Außerdem: nasses Fell stinkt! 💧😤",
+            "Da ist ein TEICH! Willst du mich ertränken?! 🌊😰",
+            "Wasser? WASSER?! Ich bin ein Springer, keine Ente! 🦆🚫",
+            "In den Teich?! Mein Ritter-Zertifikat erlaubt das nicht! 📜🌊",
+            "Nass werden?! Dann klebt alles am Fell! ALLES! 💧😱💩",
+            "Der Teich sieht tief aus! Zu tief für meine kurzen Beine! 🌊🦵",
+            "Schwimmen macht Bauchweh! Mehr als ich SCHON habe! 🏊‍♂️😫"
+        ],
+
+        // Can't enter wolf territory - explains why (10 messages)
+        blockWolf: [
+            "DA IST EIN WOLF! Der frisst mich! MIT HAUT UND HAAREN! 🐺🍽️",
+            "WOLF! Neee neee neee! Der beißt! DIE BEIßEN! 🐺🦷😭",
+            "ZU DEM WOLF?! Hast du den Verstand verloren?! 🐺🤯",
+            "Ein WOLF! Der riecht meine Angst! Und andere Sachen! 🐺👃💨",
+            "Wölfe FRESSEN Pferde! Das steht in jedem Märchen! 🐺📖😱",
+            "Ich geh nicht zum Wolf! Der macht aus mir HACKFLEISCH! 🐺🥩",
+            "WOLF-TERRITORIUM! Lebensmüde bin ich noch nicht! 🐺☠️",
+            "Sehe ich aus wie Rotkäppchen?! ZUM WOLF! Pah! 🐺👧🚫",
+            "Der Wolf hat bestimmt Hunger! ICH bin nicht das Abendessen! 🐺🍴😰",
+            "Bei dem Wolf?! Da verliere ich nicht nur meine Verdauung! 🐺💀💩"
+        ],
+
+        // Can't revisit field - explains why (10 messages)
+        blockVisited: [
+            "Da liegt schon ein PFERDEAPFEL! Zweimal drauftreten?! 💩🚫",
+            "Das Feld hab ich schon markiert! *stolz* Mit DRINGLICHKEIT! 💩😅",
+            "Da war ich schon! Die Spur ist noch... frisch! 💩💨",
+            "Nochmal da hin?! Und in mein EIGENES Zeug treten?! 💩🦶😱",
+            "Das stinkt schon genung von meinem letzten Besuch! 💩👃",
+            "GEWESEN! ERLEDIGT! HINTERLASSEN! Weiter geht's! 💩✅",
+            "Ich trete nicht in meine eigenen Hinterlassenschaften! 💩🚫🦶",
+            "Da ist noch warm! Ich meine... äh... NEIN! 💩🔥😳",
+            "Ein Ritter macht zweimal am selben Ort?! Skandal! 💩👑🚫",
+            "Das Feld ist bereits... vollständig beschriftet! 💩📝"
+        ],
+
+        // Can't reach - not an L-shaped move (10 messages)
+        blockNotL: [
+            "Das ist kein L! Ich bin ein SPRINGER, kein Turm! ♞🚫",
+            "L-Form! L! Wie LAUFENLASSEN! Nicht geradeaus! 🔷💨",
+            "Springer hüpfen im L! Zwei-eins oder eins-zwei! NICHT diagonal! ♞📐",
+            "Das kann ich nicht erreichen! Meine Beine sind L-förmig verbogen! 🦵🔀",
+            "Ich springe L-förmig! Wie ein L! Ein ELL! ELLLLL! ♞😤",
+            "Kennst du Schach?! Springer = L-Form! Immer! 📖♞",
+            "Da kann ich nicht hin! Außer ich lerne fliegen! ✈️🐴",
+            "Falsches Muster! L-Sprung heißt: Zwei Felder + Knick! 📐",
+            "So funktionieren meine Hufe nicht! L-FORM, verstanden?! 🦶🔷",
+            "Ich bin ein SPRINGER! Kein Läufer, kein Turm, kein Bauer! ♞💢"
+        ],
+
         // Speedrun mode specific (15 messages)
         speedrun: [
             "SCHNELLER! Die Zeit rennt! Und ich muss rennen! ZUR TOILETTE! ⏱️🏃‍♂️",
