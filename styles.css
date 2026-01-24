@@ -301,6 +301,9 @@ body {
 .droppings {
     font-size: 1.2rem;
     position: absolute;
+}
+
+.droppings.animate {
     animation: dropAppear 0.3s ease-out;
 }
 

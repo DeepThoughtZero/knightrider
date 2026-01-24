@@ -124,7 +124,9 @@ class KnightRiderUI {
                 else if (this.game.isVisited(col, row)) {
                     cell.classList.add('visited');
                     const order = this.game.getVisitOrder(col, row);
-                    cell.innerHTML = `<span class="droppings">💩</span><span class="visit-order">${order}</span>`;
+                    const isLastVisited = (order === this.game.visitedCount);
+                    const animClass = isLastVisited ? 'droppings animate' : 'droppings';
+                    cell.innerHTML = `<span class="${animClass}">💩</span><span class="visit-order">${order}</span>`;
                 }
                 // Check for valid move
                 else if (this.isGameStarted && this.isValidMoveTarget(col, row)) {
@@ -250,10 +252,10 @@ class KnightRiderUI {
 
     updateStatus(state) {
         const messages = {
-            start: 'Klicke auf ein Feld, um dort zu starten!',
-            playing: `Besuche alle Felder! (${this.game.getVisitableCount()} möglich)`,
-            win: '🏆 GESCHAFFT! Alle Felder besucht!',
-            lose: '❌ Festgefahren! Keine Züge mehr möglich.'
+            start: '🏇 Hoppla Galoppa – kein Feld doppelt betreten!',
+            playing: `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder!`,
+            win: '🎉 VOLLENDET! Zeit für die Sieges-Toilette! 🚽💨',
+            lose: '💩 Eingeklemmt! Jetzt sitzt nicht nur SIR fest... 😅'
         };
 
         this.statusEl.textContent = messages[state] || messages.playing;
@@ -261,7 +263,9 @@ class KnightRiderUI {
     }
 
     setKnightSpeech(text) {
-        this.knightSpeechEl.textContent = text;
+        // Convert *text* to <em>text</em> for formatting
+        const formattedText = text.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        this.knightSpeechEl.innerHTML = formattedText;
     }
 
     handleGameEnd() {

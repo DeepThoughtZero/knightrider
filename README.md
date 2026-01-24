@@ -2,9 +2,17 @@
 
 # 🐴 Knight Rider ♞
 
+### 🚀 [HIER KLICKEN UND SOFORT LOSSPIELEN!](https://deepthoughtzero.github.io/knightrider/) 🚀
+
+**Direkt im Browser spielen** • **Keine Installation** • **Link teilen & Spaß haben!**
+
+---
+
 ### Die Springer-Tour Challenge
 
-**Besuche alle Felder mit deinem Springer** • **Lustige Pferdeapfel-Spur** • **Sir Galoppino hat Verdauungsprobleme**
+🏇 **Hilf Sir Galoppino, alle Felder zu besuchen - bevor es zu spät ist!** 💨
+
+*Der kleine Ritter hat etwas Falsches gegessen und muss DRINGEND aufs Klo...*
 
 </div>
 
