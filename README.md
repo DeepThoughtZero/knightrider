@@ -53,6 +53,8 @@ Kein Zeitdruck. Denke in Ruhe nach und finde den Weg über alle Felder.
 | Felder besucht | 1 pro Feld (max. 58) |
 | Speedrun-Bonus | +10 |
 
+> 💡 **Tipp:** Du kannst deinen Score **immer** in die Bestenliste eintragen - auch wenn du stecken bleibst oder die Zeit abläuft!
+
 ## 🐴 Sir Galoppino
 
 Unser kleiner Ritter hat leider ein Problem: Er hat etwas Falsches gegessen und muss DRINGEND auf die Toilette! Seine lustigen Kommentare begleitend dich durch das Spiel. 💨

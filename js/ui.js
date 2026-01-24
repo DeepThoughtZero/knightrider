@@ -128,8 +128,8 @@ class KnightRiderUI {
                     const animClass = isLastVisited ? 'droppings animate' : 'droppings';
                     cell.innerHTML = `<span class="${animClass}">💩</span><span class="visit-order">${order}</span>`;
                 }
-                // Check for valid move
-                else if (this.isGameStarted && this.isValidMoveTarget(col, row)) {
+                // Check for valid move - only show hints in Normal mode
+                else if (this.isGameStarted && !this.isSpeedrunMode && this.isValidMoveTarget(col, row)) {
                     cell.classList.add('valid-move');
                     const accessibility = this.game.getAccessibility(col, row);
                     cell.innerHTML = `<span class="move-hint">${accessibility}</span>`;
@@ -251,14 +251,23 @@ class KnightRiderUI {
     }
 
     updateStatus(state) {
-        const messages = {
-            start: '🏇 Hoppla Galoppa – kein Feld doppelt betreten!',
-            playing: `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder!`,
-            win: '🎉 VOLLENDET! Zeit für die Sieges-Toilette! 🚽💨',
-            lose: '💩 Eingeklemmt! Jetzt sitzt nicht nur SIR fest... 😅'
-        };
+        let statusText;
 
-        this.statusEl.textContent = messages[state] || messages.playing;
+        if (state === 'start') {
+            statusText = '🏇 Hoppla Galoppa – kein Feld doppelt betreten!';
+        } else if (state === 'playing') {
+            statusText = `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder!`;
+        } else if (state === 'win') {
+            statusText = getKnightMessage('win');
+        } else if (state === 'lose') {
+            statusText = getKnightMessage('stuck');
+        } else {
+            statusText = `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder!`;
+        }
+
+        // Format *text* as italic
+        const formattedStatus = statusText.replace(/\*([^*]+)\*/g, '<em>$1</em>');
+        this.statusEl.innerHTML = formattedStatus;
         this.statusEl.className = 'game-status ' + state;
     }
 
@@ -275,14 +284,14 @@ class KnightRiderUI {
             this.updateStatus('win');
             this.setKnightSpeech(getKnightMessage('win'));
             this.sounds.playWin();
-
-            // Calculate score
-            setTimeout(() => this.handleWin(), 1500);
         } else {
             this.updateStatus('lose');
             this.setKnightSpeech(getKnightMessage('stuck'));
             this.sounds.playLose();
         }
+
+        // Always allow score entry (win or lose)
+        setTimeout(() => this.handleWin(), 1500);
     }
 
     handleWin() {
