@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="description" content="Knight Rider - Die lustige Springer-Tour Challenge mit dem verzweifelten Ritter">
+    <meta name="theme-color" content="#1a1a2e">
+    <title>Knight Rider - Springer-Tour Challenge 🐴</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header">
+            <h1>� Knight Rider ♞</h1>
+            <p class="subtitle">Die Springer-Tour Challenge</p>
+        </header>
+
+        <!-- Knight Character Speech Bubble -->
+        <section class="knight-section">
+            <div class="knight-avatar">
+                <span class="knight-emoji">🐴</span>
+                <span class="knight-name">Sir Galoppino</span>
+            </div>
+            <div class="speech-bubble">
+                <p id="knight-speech">Los geht's! *hüpf* Wo soll ich starten?</p>
+            </div>
+        </section>
+
+        <!-- Game Mode Selection -->
+        <section class="mode-selection">
+            <label for="game-mode">
+                <span class="mode-label">Spielmodus:</span>
+            </label>
+            <select id="game-mode" class="mode-select">
+                <option value="normal">🎯 Normal (entspannt)</option>
+                <option value="speedrun">⏱️ Speedrun (60s, +10 Bonus)</option>
+            </select>
+        </section>
+
+        <!-- Game Area -->
+        <main class="game-area">
+            <!-- Status -->
+            <div id="game-status" class="game-status">
+                Klicke auf ein Feld, um dort zu starten!
+            </div>
+
+            <!-- Timer (Speedrun mode) -->
+            <div id="timer-container" class="timer-container">
+                <span class="timer-icon">⏱️</span>
+                <span id="timer" class="timer">60s</span>
+            </div>
+
+            <!-- Chess Board -->
+            <div class="board-wrapper">
+                <div id="chess-board" class="chess-board"></div>
+            </div>
+
+            <!-- Stats -->
+            <div class="stats">
+                <div class="stat-item">
+                    <span class="stat-label">Züge:</span>
+                    <span id="move-count" class="stat-value">0</span>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-label">Besucht:</span>
+                    <span id="visited-count" class="stat-value">0/58</span>
+                </div>
+            </div>
+
+            <!-- Legend -->
+            <div class="legend">
+                <span class="legend-item"><span class="legend-knight">♞</span> Springer</span>
+                <span class="legend-item"><span class="legend-valid">●</span> Springbar</span>
+                <span class="legend-item"><span class="legend-visited">💩</span> Besucht</span>
+                <span class="legend-item">🌊 Teich</span>
+                <span class="legend-item">🐺 Wolf</span>
+            </div>
+
+            <!-- Controls -->
+            <div class="controls">
+                <button id="restart-btn">🔄 Neues Spiel</button>
+                <div style="display: flex; gap: 8px;">
+                    <button id="leaderboard-btn" class="icon-btn" title="Bestenliste">🏆</button>
+                    <button id="mute-btn" class="icon-btn" title="Ton umschalten">🔊</button>
+                </div>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>� Mit ❤️ und 💨 gemacht von Familie Reith</p>
+            <p>Besuche alle Felder mit dem Springer, ohne eins doppelt zu betreten!</p>
+        </footer>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboard-modal" class="leaderboard-modal">
+        <div class="card-panel">
+            <h3>
+                <span>🏆 Bestenliste</span>
+                <button id="close-leaderboard" class="close-btn">&times;</button>
+            </h3>
+
+            <!-- Score Visualizer -->
+            <div id="score-calculation" class="score-calc" style="display:none;"></div>
+
+            <!-- Name Input -->
+            <div id="name-input-section" class="name-input-container hidden">
+                <input type="text" id="player-name-input" class="name-input" placeholder="Dein Name" maxlength="20">
+                <button id="save-score-btn" class="save-btn">Speichern</button>
+            </div>
+
+            <!-- Filter Bar -->
+            <div class="leaderboard-filter">
+                <div class="filter-group">
+                    <label for="mode-filter">🎮 Modus:</label>
+                    <select id="mode-filter" class="filter-select">
+                        <option value="">Alle</option>
+                        <option value="normal">🎯 Normal</option>
+                        <option value="speedrun">⏱️ Speedrun</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Leaderboard Table -->
+            <table class="leaderboard-table">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Score</th>
+                        <th>Züge</th>
+                        <th>Modus</th>
+                        <th>Datum</th>
+                    </tr>
+                </thead>
+                <tbody id="leaderboard-body">
+                    <!-- Filled by JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <!-- JavaScript Modules -->
+    <script src="js/sound.js"></script>
+    <script src="js/game.js"></script>
+    <script src="js/knight.js"></script>
+    <script src="js/leaderboard.js"></script>
+    <script src="js/ui.js"></script>
+</body>
+
+</html>
