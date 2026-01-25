@@ -206,6 +206,12 @@ body {
     animation: statusGlow 1s ease-out;
 }
 
+.game-status.partialWin {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.3), rgba(245, 158, 11, 0.2));
+    border-color: var(--warning);
+    animation: statusGlow 1s ease-out;
+}
+
 .game-status.lose {
     background: linear-gradient(135deg, rgba(239, 68, 68, 0.3), rgba(185, 28, 28, 0.2));
     border-color: var(--danger);
@@ -814,6 +820,28 @@ body {
 
 .rank-3 {
     color: #cd7f32;
+}
+
+/* Highlighted just-submitted row */
+.leaderboard-table tr.highlighted-row td {
+    background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15));
+    animation: highlightPulse 1.5s ease-in-out infinite;
+}
+
+.leaderboard-table tr.highlighted-row td:first-child {
+    border-left: 3px solid #f59e0b;
+}
+
+@keyframes highlightPulse {
+
+    0%,
+    100% {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.25), rgba(245, 158, 11, 0.15));
+    }
+
+    50% {
+        background: linear-gradient(135deg, rgba(251, 191, 36, 0.4), rgba(245, 158, 11, 0.3));
+    }
 }
 
 /* ===== Responsive Design ===== */

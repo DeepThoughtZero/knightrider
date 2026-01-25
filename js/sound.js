@@ -114,6 +114,33 @@ class SoundManager {
         }
     }
 
+    // Partial win sound - short positive jingle (not as grand as full win)
+    playPartialWin() {
+        if (this.isMuted || !this.ctx) return;
+
+        // Short ascending notes
+        const notes = [440, 554, 659]; // A4, C#5, E5 - hopeful but not triumphant
+
+        notes.forEach((freq, i) => {
+            const osc = this.ctx.createOscillator();
+            const gain = this.ctx.createGain();
+
+            osc.connect(gain);
+            gain.connect(this.ctx.destination);
+
+            osc.frequency.setValueAtTime(freq, this.ctx.currentTime + i * 0.12);
+            gain.gain.setValueAtTime(0.18, this.ctx.currentTime + i * 0.12);
+            gain.gain.exponentialRampToValueAtTime(0.01, this.ctx.currentTime + i * 0.12 + 0.25);
+
+            osc.start(this.ctx.currentTime + i * 0.12);
+            osc.stop(this.ctx.currentTime + i * 0.12 + 0.25);
+        });
+
+        // Add just a couple hoof sounds
+        setTimeout(() => this.playMove(), 500);
+        setTimeout(() => this.playMove(), 600);
+    }
+
     // Lose sound - sad trombone
     playLose() {
         if (this.isMuted || !this.ctx) return;

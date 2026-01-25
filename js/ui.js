@@ -269,11 +269,13 @@ class KnightRiderUI {
         let statusText;
 
         if (state === 'start') {
-            statusText = '🏇 Hoppla Galoppa – kein Feld doppelt betreten!';
+            statusText = '🏇 Setze Sir Galoppino irgendwo auf\'s Brett!';
         } else if (state === 'playing') {
-            statusText = `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder!`;
+            statusText = `🥕 Spring auf alle ${this.game.getVisitableCount()} Felder – ohne Wiederholung!`;
         } else if (state === 'win') {
             statusText = getKnightMessage('win');
+        } else if (state === 'partialWin') {
+            statusText = getKnightMessage('partialWin');
         } else if (state === 'lose') {
             statusText = getKnightMessage('stuck');
         } else {
@@ -299,6 +301,11 @@ class KnightRiderUI {
             this.updateStatus('win');
             this.setKnightSpeech(getKnightMessage('win'));
             this.sounds.playWin();
+        } else if (this.game.visitedCount >= 40) {
+            // Partial win - 40+ fields is a respectable achievement!
+            this.updateStatus('partialWin');
+            this.setKnightSpeech(getKnightMessage('partialWin'));
+            this.sounds.playPartialWin();
         } else {
             this.updateStatus('lose');
             this.setKnightSpeech(getKnightMessage('stuck'));

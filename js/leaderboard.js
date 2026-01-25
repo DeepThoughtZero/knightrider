@@ -11,6 +11,9 @@ const LEADERBOARD_CONFIG = {
 // Cache for leaderboard entries
 let allLeaderboardEntries = [];
 
+// Track the last saved entry to highlight it
+let lastSavedEntry = null;
+
 // Initialize filter listeners
 document.addEventListener('DOMContentLoaded', () => {
     const modeFilter = document.getElementById('mode-filter');
@@ -79,6 +82,15 @@ async function saveHighscore(name, score, moves, mode) {
             method: 'GET',
             mode: 'cors'
         });
+
+        // Track the saved entry for highlighting
+        lastSavedEntry = {
+            name: name,
+            score: score,
+            mode: mode,
+            timestamp: Date.now()
+        };
+
         return true;
     } catch (error) {
         console.error("Fehler beim Speichern:", error);
@@ -137,11 +149,24 @@ function renderLeaderboard(entries) {
     if (!tbody) return;
 
     const topEntries = entries.slice(0, 50);
+    let alreadyHighlighted = false; // Track if we've already highlighted one entry
 
     tbody.innerHTML = topEntries.map((entry, index) => {
         const rank = index + 1;
         let rankDisplay = rank;
         let rankClass = '';
+        let isHighlighted = false;
+
+        // Check if this is the just-saved entry (within last 30 seconds) - only highlight ONE entry
+        if (!alreadyHighlighted &&
+            lastSavedEntry &&
+            (Date.now() - lastSavedEntry.timestamp) < 30000 &&
+            entry.name === lastSavedEntry.name &&
+            Number(entry.score) === Number(lastSavedEntry.score) &&
+            (entry.difficulty || entry.mode || '').toLowerCase() === lastSavedEntry.mode.toLowerCase()) {
+            isHighlighted = true;
+            alreadyHighlighted = true; // Don't highlight any more entries
+        }
 
         if (rank === 1) {
             rankDisplay = `🥇 ${rank}`;
@@ -175,8 +200,10 @@ function renderLeaderboard(entries) {
         const modeIcon = mode.toLowerCase() === 'speedrun' ? '⏱️' : '🎯';
         const safeMode = `${modeIcon} ${escapeHtml(mode)}`;
 
+        const rowClass = isHighlighted ? 'highlighted-row' : '';
+
         return `
-            <tr>
+            <tr class="${rowClass}">
                 <td class="${rankClass}" style="font-size: 1.1em;">${rankDisplay}</td>
                 <td style="font-weight: 500">${safeName}</td>
                 <td style="font-weight: bold">${safeScore}</td>

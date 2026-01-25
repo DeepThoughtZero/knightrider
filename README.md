@@ -1,6 +1,6 @@
 <div align="center">
 
-# 🐴 Knight Rider ♞
+# 🐴 Pferdeäpfel-Parade 🐴
 
 ### 🚀 [HIER KLICKEN UND SOFORT LOSSPIELEN!](https://deepthoughtzero.github.io/knightrider/) 🚀
 
@@ -38,7 +38,7 @@ Besuche alle 58 freien Felder, ohne ein Feld doppelt zu betreten - dann erreicht
 
 ---
 
-**Knight Rider** ist ein Puzzle-Spiel basierend auf der klassischen Springer-Tour (Knight's Tour). Der Springer muss alle Felder des Schachbretts besuchen, ohne ein Feld doppelt zu betreten - und dabei einigen Hindernissen ausweichen!
+**Pferdeäpfel-Parade** ist ein Puzzle-Spiel basierend auf der klassischen Springer-Tour (Knight's Tour). Der Springer muss alle Felder des Schachbretts besuchen, ohne ein Feld doppelt zu betreten - und dabei einigen Hindernissen ausweichen!
 
 ## 🎮 Features
 

@@ -176,6 +176,25 @@ const KNIGHT_CHARACTER = {
             "WELTREKORD! In beiden Kategorien! 🌍🏆💩"
         ],
 
+        // Partial win (40+ fields but not completed) - 15 messages
+        partialWin: [
+            "Okay, 40+ Felder! Das zählt! *erleichtertes Seufzen* 🎊💨",
+            "Nicht perfekt, aber RESPEKTABEL! Jetzt aber zur Toilette! 🥈🚽",
+            "Mehr als die Hälfte! Mein Darm ist beeindruckt! *grummel* 👏💩",
+            "Fast geschafft! Aber 'fast' reicht für jetzt! AUFS KLO! 🏃‍♂️💨",
+            "Gute Leistung! Kein Sieg, aber auch keine Schande! *stolzer Pups* 💨🎖️",
+            "40+ Felder! Das ist mehr als mancher Ritter je schafft! 🛡️✨",
+            "Teilsieg! Besser als Totalversagen! Ab zum WC! 🚽🎉",
+            "Nicht alle Felder, aber genug für die Ehre! Und jetzt: ERLEICHTERUNG! 😅💩",
+            "Beachtlich! Sir Galoppino ist ein bisschen stolz! *bescheidener Furz* 💨🥉",
+            "Das war ordentlich! Ordentlicher als mein Darm gerade! 📊💩",
+            "Kein perfekter Lauf, aber ein guter! *zufriedenes Grummeln* 🐴✅",
+            "40+ ist das neue 58! Zumindest sage ich das jetzt! 😅🏆",
+            "Halb gewonnen ist gar nicht verloren! Jetzt aber WC! 🚽🏃‍♂️",
+            "Respektable Tour! Mein Hintern applaudiert! *klatsch* 👏💨",
+            "Gut gemacht! Nicht perfekt, aber mein Magen verzeiht! 🎊😌"
+        ],
+
         // Idle / thinking (20 messages)
         idle: [
             "*tappel tappel* Denk nach, denk nach! *grummel* 🤔💨",
