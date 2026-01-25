@@ -118,7 +118,7 @@ class KnightRiderUI {
                     this.game.knightPos.col === col &&
                     this.game.knightPos.row === row) {
                     cell.classList.add('knight-cell');
-                    cell.innerHTML = `<span class="knight">♞</span>`;
+                    cell.innerHTML = `<span class="knight">🐴</span>`;
                 }
                 // Check for visited
                 else if (this.game.isVisited(col, row)) {

@@ -42,8 +42,7 @@ Besuche alle 58 freien Felder, ohne ein Feld doppelt zu betreten - dann erreicht
 
 ## 🎮 Features
 
-- ♞ **Springer-Tour Puzzle** - Besuche alle 58 freien Felder des Bretts
-- 🐴 **Sir Galoppino** - Der kleine Ritter mit... Verdauungsproblemen 💨
+- 🐴 **Sir Galoppino's Springer-Tour** - Besuche alle 58 freien Felder des Bretts. Unser kleiner Ritter hat etwas Falsches gegessen und muss DRINGEND auf die Toilette! Seine lustigen Kommentare begleiten dich durch das Spiel. 💨
 - 💩 **Pferdeapfel-Spur** - Jedes besuchte Feld wird markiert
 - 🌊 **Teich-Hindernisse** - 4 zusammenhängende Wasserfelder
 - 🐺 **Wolf-Hindernisse** - 2 gefährliche einzelne Felder
@@ -75,17 +74,31 @@ Kein Zeitdruck. Denke in Ruhe nach und finde den Weg über alle Felder.
 
 > 💡 **Tipp:** Du kannst deinen Score **immer** in die Bestenliste eintragen - auch wenn du stecken bleibst oder die Zeit abläuft!
 
-## 🐴 Sir Galoppino
-
-Unser kleiner Ritter hat leider ein Problem: Er hat etwas Falsches gegessen und muss DRINGEND auf die Toilette! Seine lustigen Kommentare begleitend dich durch das Spiel. 💨
 
 ## 🚀 Lokal starten
 
+### 1. Herunterladen
+
+**Option A: ZIP-Download**
+1. Gehe zu [github.com/DeepThoughtZero/knightrider](https://github.com/DeepThoughtZero/knightrider)
+2. Klicke auf den grünen **"Code"**-Button
+3. Wähle **"Download ZIP"**
+4. Entpacke die ZIP-Datei
+
+**Option B: Mit Git klonen**
 ```bash
-# Einfach index.html im Browser öffnen
-# Oder mit lokalem Server:
+git clone https://github.com/DeepThoughtZero/knightrider.git
+cd knightrider
+```
+
+### 2. Starten
+
+```bash
+# Variante 1: Einfach index.html im Browser öffnen (Doppelklick)
+
+# Variante 2: Mit lokalem Server (empfohlen für volle Funktionalität)
 python3 -m http.server 8080
-# Dann: http://localhost:8080
+# Dann im Browser öffnen: http://localhost:8080
 ```
 
 ## 💻 Technologie
