@@ -3,159 +3,262 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <meta name="description" content="Knight Rider - Die lustige Springer-Tour Challenge mit dem verzweifelten Ritter">
-    <meta name="theme-color" content="#1a1a2e">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <meta name="description" content="Pferdeäpfel-Parade - Die lustige Springer-Tour Challenge mit dem verzweifelten Ritter Sir Galoppino">
+    <meta name="theme-color" content="#0f0a2a">
     <title>Pferdeäpfel-Parade - Springer-Tour Challenge 🐴</title>
+
+    <!-- Social Sharing -->
+    <meta property="og:title" content="🐴 Pferdeäpfel-Parade – Die Springer-Tour Challenge">
+    <meta property="og:description" content="Hilf Sir Galoppino über alle 58 Felder zu springen – bevor es zu spät ist! 💨🚽">
+    <meta property="og:image" content="https://deepthoughtzero.github.io/knightrider/KnightRiderPreview.png">
+    <meta property="og:type" content="website">
+
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🐴</text></svg>">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Lilita+One&family=Outfit:wght@400;500;600;700;800&display=swap"
+        rel="stylesheet">
 
     <!-- Styles -->
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <div class="app-container">
+    <!-- Atmospheric night scenery -->
+    <div class="scenery" aria-hidden="true">
+        <div class="scenery__stars"></div>
+        <div class="scenery__stars scenery__stars--far"></div>
+        <div class="scenery__moon"></div>
+        <svg class="scenery__land" viewBox="0 0 1440 260" preserveAspectRatio="xMidYMax slice">
+            <path class="scenery__hills-back"
+                d="M0 260V150Q160 95 330 135T660 120T990 140T1260 105T1440 120V260Z" />
+            <g class="scenery__castle" transform="translate(1290 116) scale(0.55) translate(-1001 0)">
+                <rect x="1035" y="120" width="190" height="140" />
+                <rect x="1005" y="80" width="52" height="180" />
+                <rect x="1205" y="70" width="52" height="190" />
+                <rect x="1105" y="45" width="56" height="215" />
+                <path d="M1001 82L1031 30L1061 82Z" />
+                <path d="M1201 72L1231 18L1261 72Z" />
+                <path d="M1101 47L1133 0L1165 47Z" />
+                <rect x="1035" y="108" width="14" height="14" />
+                <rect x="1060" y="108" width="14" height="14" />
+                <rect x="1085" y="108" width="14" height="14" />
+                <rect x="1170" y="108" width="14" height="14" />
+                <rect x="1192" y="108" width="14" height="14" />
+                <rect x="1131" y="0" width="3" height="22" />
+                <path class="scenery__flag" d="M1134 2L1156 9L1134 16Z" />
+            </g>
+            <g class="scenery__windows" transform="translate(1290 116) scale(0.55) translate(-1001 0)">
+                <rect x="1024" y="110" width="12" height="18" rx="6" />
+                <rect x="1225" y="100" width="12" height="18" rx="6" />
+                <rect x="1126" y="80" width="14" height="22" rx="7" />
+                <rect x="1080" y="170" width="12" height="16" rx="6" />
+                <rect x="1170" y="175" width="12" height="16" rx="6" />
+            </g>
+            <path class="scenery__hills-front"
+                d="M0 260V200Q200 165 420 195T840 185T1180 205T1440 180V260Z" />
+        </svg>
+    </div>
+
+    <!-- Effects layer (confetti) -->
+    <canvas id="fx-canvas" class="fx-canvas" aria-hidden="true"></canvas>
+
+    <div class="app">
         <!-- Header -->
-        <header class="header">
-            <h1>🐴 Pferdeäpfel-Parade 🐴</h1>
-            <p class="subtitle">Sir Galoppino hat etwas Falsches gegessen und muss DRINGEND aufs Klo! 🚽 Hilf ihm über
-                alle Felder zu springen – ohne in seine eigenen Hinterlassenschaften zu treten! 💩</p>
+        <header class="hero">
+            <span class="hero__eyebrow">♞ Die Springer-Tour Challenge</span>
+            <h1 class="hero__title">
+                <span class="hero__icon" aria-hidden="true">🐴</span>
+                <span class="hero__text">Pferdeäpfel-Parade</span>
+                <span class="hero__icon hero__icon--right" aria-hidden="true">💩</span>
+            </h1>
+            <p class="hero__subtitle">Sir Galoppino hat etwas Falsches gegessen und muss <strong>DRINGEND</strong>
+                aufs Klo! 🚽 Hilf ihm über alle Felder zu springen – ohne in seine eigenen Hinterlassenschaften zu
+                treten! 💩</p>
         </header>
 
-
-
-        <!-- Game Mode Selection -->
-        <section class="mode-selection">
-            <label for="game-mode">
-                <span class="mode-label">Spielmodus:</span>
-            </label>
-            <select id="game-mode" class="mode-select">
-                <option value="normal">🎯 Normal (entspannt)</option>
-                <option value="speedrun">⏱️ Speedrun (60s, +10 Bonus)</option>
-            </select>
-        </section>
-
-        <!-- Game Area -->
-        <main class="game-area">
-            <!-- Status -->
-            <div id="game-status" class="game-status">
-                🏇 Setze Sir Galoppino irgendwo auf's Brett!
+        <main class="layout">
+            <!-- Game Mode Selection -->
+            <div id="mode-switch" class="mode-switch area-mode" data-mode="normal" role="group"
+                aria-label="Spielmodus">
+                <span class="mode-switch__thumb" aria-hidden="true"></span>
+                <button type="button" class="mode-switch__btn" data-mode="normal" aria-pressed="true">
+                    <span class="mode-switch__icon" aria-hidden="true">🎯</span>
+                    <span class="mode-switch__label">Normal<small>entspannt · mit Tipps</small></span>
+                </button>
+                <button type="button" class="mode-switch__btn" data-mode="speedrun" aria-pressed="false">
+                    <span class="mode-switch__icon" aria-hidden="true">⏱️</span>
+                    <span class="mode-switch__label">Speedrun<small>60 s · +10 Bonus</small></span>
+                </button>
             </div>
 
-            <!-- Knight Character Speech Bubble (now above board) -->
-            <section class="knight-section">
-                <div class="knight-avatar">
-                    <span class="knight-emoji">🐴</span>
-                    <span class="knight-name">Sir Galoppino</span>
+            <!-- Knight Character -->
+            <section id="knight-card" class="knight-card card area-knight">
+                <div class="knight-card__avatar" aria-hidden="true">
+                    <span class="knight-card__halo"></span>
+                    <span class="knight-card__emoji">🐴</span>
+                    <span id="knight-mood" class="knight-card__mood">🙂</span>
                 </div>
-                <div class="speech-bubble">
-                    <p id="knight-speech">Los geht's! <em>hüpf</em> Wo soll ich starten?</p>
+                <div class="knight-card__body">
+                    <span class="knight-card__name">Sir Galoppino <small>Ritter in Not</small></span>
+                    <div id="speech-bubble" class="speech-bubble" aria-live="polite">
+                        <p id="knight-speech">Los geht's! <em>hüpf</em> Wo soll ich starten?</p>
+                    </div>
                 </div>
             </section>
 
-            <!-- Timer (Speedrun mode) -->
-            <div id="timer-container" class="timer-container">
-                <span class="timer-icon">⏱️</span>
-                <span id="timer" class="timer">60s</span>
+            <!-- Status -->
+            <div id="game-status" class="game-status area-status" role="status">
+                🏇 Setze Sir Galoppino irgendwo auf's Brett!
             </div>
+
+            <!-- Journey to the golden toilet -->
+            <section class="journey card area-journey" aria-label="Fortschritt">
+                <div class="journey__head">
+                    <span class="journey__title">🗺️ Weg zum goldenen Klo</span>
+                    <span id="journey-percent" class="journey__percent">0%</span>
+                </div>
+                <div class="journey__track">
+                    <div id="journey-fill" class="journey__fill"></div>
+                    <span id="journey-marker" class="journey__marker" title="Ab 40 Feldern: Teilsieg!">
+                        <span class="journey__marker-flag">🥈</span>
+                    </span>
+                    <span id="journey-runner" class="journey__runner" aria-hidden="true">🐴</span>
+                    <span class="journey__goal" aria-hidden="true">🚽</span>
+                </div>
+            </section>
 
             <!-- Chess Board -->
-            <div class="board-wrapper">
-                <div id="chess-board" class="chess-board"></div>
-            </div>
+            <section class="board-area area-board">
+                <div id="fuse" class="fuse" aria-hidden="true">
+                    <div id="fuse-bar" class="fuse__bar"><span class="fuse__spark">🔥</span></div>
+                </div>
+                <div id="board-frame" class="board-frame">
+                    <div class="coords coords--ranks" aria-hidden="true">
+                        <span>8</span><span>7</span><span>6</span><span>5</span><span>4</span><span>3</span><span>2</span><span>1</span>
+                    </div>
+                    <div id="chess-board" class="chess-board" role="group" aria-label="Schachbrett"></div>
+                    <div class="coords coords--files" aria-hidden="true">
+                        <span>a</span><span>b</span><span>c</span><span>d</span><span>e</span><span>f</span><span>g</span><span>h</span>
+                    </div>
+                    <div id="board-stamp" class="board-stamp" aria-hidden="true"></div>
+                </div>
+            </section>
 
             <!-- Stats -->
-            <div class="stats">
-                <div class="stat-item">
-                    <span class="stat-label">Züge:</span>
-                    <span id="move-count" class="stat-value">0</span>
+            <section class="stats area-stats" aria-label="Statistik">
+                <div class="stat card" id="stat-moves">
+                    <span class="stat__icon" aria-hidden="true">🐴</span>
+                    <span id="move-count" class="stat__value">0</span>
+                    <span class="stat__label">Züge</span>
                 </div>
-                <div class="stat-item">
-                    <span class="stat-label">Besucht:</span>
-                    <span id="visited-count" class="stat-value">0/58</span>
+                <div class="stat card" id="stat-visited">
+                    <span class="stat__icon" aria-hidden="true">💩</span>
+                    <span id="visited-count" class="stat__value">0/58</span>
+                    <span class="stat__label">Besucht</span>
                 </div>
+                <div class="stat card" id="stat-remaining">
+                    <span class="stat__icon" aria-hidden="true">🎯</span>
+                    <span id="remaining-count" class="stat__value">58</span>
+                    <span class="stat__label">Übrig</span>
+                </div>
+                <div class="stat stat--time card" id="timer-container">
+                    <span class="stat__icon" aria-hidden="true">⏱️</span>
+                    <span id="timer" class="stat__value">0:00</span>
+                    <span id="timer-label" class="stat__label">Zeit</span>
+                </div>
+            </section>
+
+            <!-- Controls -->
+            <div class="controls area-controls">
+                <button id="restart-btn" class="btn btn--primary" type="button">
+                    <span aria-hidden="true">🔄</span> Neues Spiel
+                </button>
+                <button id="leaderboard-btn" class="btn btn--icon" type="button" title="Bestenliste"
+                    aria-label="Bestenliste">🏆</button>
+                <button id="mute-btn" class="btn btn--icon" type="button" title="Ton umschalten"
+                    aria-label="Ton umschalten">🔊</button>
             </div>
 
             <!-- Legend -->
-            <div class="legend">
-                <span class="legend-item"><span class="legend-knight">🐴</span> Springer</span>
-                <span class="legend-item"><span class="legend-valid">●</span> Springbar</span>
-                <span class="legend-item"><span class="legend-visited">💩</span> Besucht</span>
-                <span class="legend-item">🌊 Teich</span>
-                <span class="legend-item">🐺 Wolf</span>
-            </div>
-
-            <!-- Controls -->
-            <div class="controls">
-                <button id="restart-btn">🔄 Neues Spiel</button>
-                <div style="display: flex; gap: 8px;">
-                    <button id="leaderboard-btn" class="icon-btn" title="Bestenliste">🏆</button>
-                    <button id="mute-btn" class="icon-btn" title="Ton umschalten">🔊</button>
-                </div>
+            <div class="legend area-legend">
+                <span class="legend__item"><span aria-hidden="true">🐴</span> Springer</span>
+                <span class="legend__item legend__item--hint"><span class="legend__dot"></span> Springbar</span>
+                <span class="legend__item legend__item--hint"><span class="legend__dot legend__dot--best"></span>
+                    Tipp</span>
+                <span class="legend__item legend__item--hint"><span class="legend__dot legend__dot--dead"></span>
+                    Sackgasse</span>
+                <span class="legend__item"><span aria-hidden="true">💩</span> Besucht</span>
+                <span class="legend__item"><span aria-hidden="true">🌊</span> Teich</span>
+                <span class="legend__item"><span aria-hidden="true">🐺</span> Wolf</span>
             </div>
         </main>
 
         <footer class="footer">
             <p>🐴 Mit ❤️ und 💨 gemacht von Familie Reith</p>
-            <p><a href="https://github.com/DeepThoughtZero/knightrider" target="_blank"
-                    style="color: #94a3b8; text-decoration: none;">💻 Mehr Infos auf GitHub</a></p>
+            <p><a href="https://github.com/DeepThoughtZero/knightrider" target="_blank" rel="noopener">💻 Mehr
+                    Infos auf GitHub</a></p>
         </footer>
     </div>
 
     <!-- Leaderboard Modal -->
-    <div id="leaderboard-modal" class="leaderboard-modal">
+    <div id="leaderboard-modal" class="leaderboard-modal" role="dialog" aria-modal="true"
+        aria-labelledby="leaderboard-title" aria-hidden="true">
         <div class="card-panel">
-            <h3>
-                <span>🏆 Bestenliste</span>
-                <button id="close-leaderboard" class="close-btn">&times;</button>
-            </h3>
+            <header class="card-panel__header">
+                <h2 id="leaderboard-title"><span aria-hidden="true">🏆</span> Bestenliste</h2>
+                <button id="close-leaderboard" class="close-btn" type="button" aria-label="Schließen">&times;</button>
+            </header>
 
             <!-- Score Visualizer -->
-            <div id="score-calculation" class="score-calc" style="display:none;"></div>
+            <div id="score-calculation" class="result-card" hidden></div>
 
             <!-- Name Input -->
-            <div id="name-input-section" class="name-input-container hidden">
-                <input type="text" id="player-name-input" class="name-input" placeholder="Dein Name" maxlength="20">
-                <button id="save-score-btn" class="save-btn">Speichern</button>
-            </div>
+            <form id="name-input-section" class="name-input-container hidden" autocomplete="on">
+                <input type="text" id="player-name-input" class="name-input" placeholder="Dein Name" maxlength="20"
+                    name="nickname" aria-label="Dein Name">
+                <button id="save-score-btn" class="save-btn" type="submit">💾 Speichern</button>
+            </form>
 
             <!-- Filter Bar -->
-            <div class="leaderboard-filter">
-                <div class="filter-group">
-                    <label for="mode-filter">🎮 Modus:</label>
-                    <select id="mode-filter" class="filter-select">
-                        <option value="">Alle</option>
-                        <option value="normal">🎯 Normal</option>
-                        <option value="speedrun">⏱️ Speedrun</option>
-                    </select>
-                </div>
+            <div class="leaderboard-filter" role="group" aria-label="Nach Modus filtern">
+                <button type="button" class="filter-pill is-active" data-filter="" aria-pressed="true">Alle</button>
+                <button type="button" class="filter-pill" data-filter="normal" aria-pressed="false">🎯 Normal</button>
+                <button type="button" class="filter-pill" data-filter="speedrun" aria-pressed="false">⏱️
+                    Speedrun</button>
             </div>
 
             <!-- Leaderboard Table -->
-            <table class="leaderboard-table">
-                <thead>
-                    <tr>
-                        <th>#</th>
-                        <th>Name</th>
-                        <th>Score</th>
-                        <th>Züge</th>
-                        <th>Modus</th>
-                        <th>Datum</th>
-                    </tr>
-                </thead>
-                <tbody id="leaderboard-body">
-                    <!-- Filled by JS -->
-                </tbody>
-            </table>
+            <div class="table-wrap">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Name</th>
+                            <th>Score</th>
+                            <th>Züge</th>
+                            <th>Modus</th>
+                            <th class="col-date">Datum</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboard-body">
+                        <!-- Filled by JS -->
+                    </tbody>
+                </table>
+            </div>
         </div>
     </div>
 
+    <!-- Toast notifications -->
+    <div id="toast-stack" class="toast-stack" aria-live="assertive"></div>
+
     <!-- JavaScript Modules -->
     <script src="js/sound.js"></script>
+    <script src="js/effects.js"></script>
     <script src="js/game.js"></script>
     <script src="js/knight.js"></script>
     <script src="js/leaderboard.js"></script>

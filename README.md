@@ -49,6 +49,19 @@ Besuche alle 58 freien Felder, ohne ein Feld doppelt zu betreten - dann erreicht
 - ⏱️ **Speedrun-Modus** - 60 Sekunden Zeitlimit, +10 Bonuspunkte
 - 🏆 **Online-Bestenliste** - Miss dich mit anderen Springern
 
+## ✨ Look & Feel
+
+- 🌙 **Märchenhafte Nachtkulisse** - Funkelnde Sterne, leuchtender Mond und eine Burg mit flackernden Fenstern
+- ♞ **Holz-Schachbrett mit Koordinaten** - Sir Galoppino *springt* im Bogen von Feld zu Feld und hinterlässt eine 💨-Wolke
+- 🧵 **Routen-Spur** - Eine Linie zeigt die komplette bisherige Tour über das Brett
+- 🟡 **Farbige Tipps** (Normal-Modus) - Grün = springbar, Gold = bester Zug (Warnsdorff), Rot = Sackgasse, 🚽 = letzter Sprung
+- 🗺️ **Weg zum goldenen Klo** - Fortschrittsbalken mit galoppierendem Pferd und 🥈-Marke ab 40 Feldern
+- 😬 **Stimmungs-Avatar** - Je näher das Ziel, desto nervöser zappelt Sir Galoppino
+- 🔥 **Brennende Lunte** im Speedrun-Modus - inklusive Ticken in den letzten 10 Sekunden
+- 🎉 **Konfetti, Stempel & Fanfaren** beim Spielende - und eine Ergebnis-Karte mit hochzählendem Score
+- 📱 **Responsive** - Zweispaltig am Desktop, kompakt am Handy
+- ⌨️ **Barrierearm** - Pfeiltasten + Enter auf dem Brett, `Esc` schließt die Bestenliste, reduzierte Animationen bei `prefers-reduced-motion`
+
 ## 🎯 Spielmodi
 
 ### Normal (entspannt)
@@ -103,8 +116,9 @@ python3 -m http.server 8080
 
 ## 💻 Technologie
 
-- Vanilla JavaScript (ES6)
-- CSS Grid für Schachbrett
+- Vanilla JavaScript (ES6) - kein Build-Schritt nötig
+- CSS Grid, Container Queries & CSS-Animationen für Brett und Layout
+- Web Animations API & Canvas für Sprung-Animation und Konfetti
 - Web Audio API für Sounds
 - Google Sheets als Leaderboard-Backend
 

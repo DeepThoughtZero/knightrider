@@ -86,6 +86,26 @@ class SoundManager {
         osc.stop(this.ctx.currentTime + 0.05);
     }
 
+    // Countdown tick for the last seconds in speedrun mode
+    playTick() {
+        if (this.isMuted || !this.ctx) return;
+
+        const osc = this.ctx.createOscillator();
+        const gain = this.ctx.createGain();
+
+        osc.connect(gain);
+        gain.connect(this.ctx.destination);
+
+        osc.type = 'square';
+        osc.frequency.setValueAtTime(1200, this.ctx.currentTime);
+
+        gain.gain.setValueAtTime(0.05, this.ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, this.ctx.currentTime + 0.04);
+
+        osc.start();
+        osc.stop(this.ctx.currentTime + 0.04);
+    }
+
     // Victory fanfare with horse gallop
     playWin() {
         if (this.isMuted || !this.ctx) return;

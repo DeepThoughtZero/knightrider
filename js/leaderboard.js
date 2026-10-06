@@ -14,16 +14,29 @@ let allLeaderboardEntries = [];
 // Track the last saved entry to highlight it
 let lastSavedEntry = null;
 
+// Did the last load fail? (used for the empty state message)
+let leaderboardLoadFailed = false;
+
 // Initialize filter listeners
 document.addEventListener('DOMContentLoaded', () => {
-    const modeFilter = document.getElementById('mode-filter');
-
-    if (modeFilter) {
-        modeFilter.addEventListener('change', () => {
-            filterAndRenderLeaderboard(modeFilter.value);
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+        pill.addEventListener('click', () => {
+            setActiveFilter(pill.dataset.filter);
+            filterAndRenderLeaderboard(pill.dataset.filter);
         });
-    }
+    });
 });
+
+/**
+ * Mark the active filter pill
+ */
+function setActiveFilter(filterMode) {
+    document.querySelectorAll('.filter-pill').forEach(pill => {
+        const isActive = pill.dataset.filter === filterMode;
+        pill.classList.toggle('is-active', isActive);
+        pill.setAttribute('aria-pressed', String(isActive));
+    });
+}
 
 /**
  * Filter and re-render leaderboard
@@ -32,9 +45,9 @@ function filterAndRenderLeaderboard(filterMode) {
     let filtered = allLeaderboardEntries;
 
     if (filterMode === 'speedrun') {
-        filtered = filtered.filter(entry => (entry.mode || '').toLowerCase() === 'speedrun');
+        filtered = filtered.filter(entry => String(entry.difficulty || entry.mode || '').toLowerCase() === 'speedrun');
     } else if (filterMode === 'normal') {
-        filtered = filtered.filter(entry => (entry.mode || '').toLowerCase() === 'normal');
+        filtered = filtered.filter(entry => String(entry.difficulty || entry.mode || '').toLowerCase() === 'normal');
     }
 
     renderLeaderboard(filtered);
@@ -51,14 +64,15 @@ async function loadLeaderboard() {
         const entries = data.entries || [];
 
         allLeaderboardEntries = entries;
+        leaderboardLoadFailed = false;
 
         // Reset filter
-        const modeFilter = document.getElementById('mode-filter');
-        if (modeFilter) modeFilter.value = '';
+        setActiveFilter('');
 
         return entries;
     } catch (error) {
         console.error("Fehler beim Laden der Bestenliste:", error);
+        leaderboardLoadFailed = true;
         return [];
     }
 }
@@ -99,40 +113,53 @@ async function saveHighscore(name, score, moves, mode) {
 }
 
 /**
- * Show score visualization
+ * Show score visualization (result card above the leaderboard)
  */
-function showScoreVisualization(mode, moves, finalScore, details = '') {
+function showScoreVisualization(mode, moves, finalScore, details = '', extra = {}) {
     const calcDiv = document.getElementById('score-calculation');
     if (!calcDiv) return;
 
+    const outcome = extra.outcome || 'win';
     const modeEmoji = mode === 'Speedrun' ? '⏱️' : '🎯';
+    const headlines = {
+        win: '🚽 Ziel erreicht – dein Score',
+        partialWin: '🥈 Starke Tour – dein Score',
+        lose: '💩 Tour beendet – dein Score'
+    };
 
+    const fieldsChip = extra.visitable
+        ? `<span class="chip">💩 ${extra.visited}/${extra.visitable} Felder</span>`
+        : '';
+    const bonusChip = extra.bonus
+        ? `<span class="chip chip--bonus">⚡ +${extra.bonus} Bonus</span>`
+        : '';
+
+    const formula = extra.visitable
+        ? `${extra.visited} Felder${extra.bonus ? ` + ${extra.bonus} Speedrun-Bonus` : ''} = ${finalScore} Punkte`
+        : details;
+
+    calcDiv.className = `result-card result-card--${outcome}`;
     calcDiv.innerHTML = `
-        <div style="display:flex; gap:12px; align-items:center; width:100%; flex-wrap:wrap;">
-            <span class="score-part base">
-                <span>${modeEmoji}</span> Modus: ${mode}
-            </span>
-            
-            <span class="score-part penalty">
-                <span>🐴</span> Züge: ${moves}
-            </span>
-            
-            <span class="score-part result">
-                <span>🏆</span> Score: ${finalScore}
-            </span>
+        <div class="result-card__headline">${headlines[outcome] || headlines.win}</div>
+        <div class="result-card__score" id="result-score">0</div>
+        <div class="result-card__chips">
+            <span class="chip">${modeEmoji} ${escapeHtml(mode)}</span>
+            <span class="chip">🐴 ${escapeHtml(moves)} Züge</span>
+            ${fieldsChip}
+            ${bonusChip}
         </div>
-        ${details ? `<div style="width:100%; font-size:0.85em; color:#64748b; margin-top:8px; padding-left:4px;">ℹ️ ${details}</div>` : ''}
+        ${formula ? `<div class="result-card__details">ℹ️ ${escapeHtml(formula)}</div>` : ''}
     `;
 
-    calcDiv.style.display = 'flex';
-    calcDiv.style.flexWrap = 'wrap';
+    calcDiv.hidden = false;
+    Effects.countUp(document.getElementById('result-score'), finalScore, 1100);
 }
 
 /**
  * Escape HTML to prevent XSS
  */
 function escapeHtml(text) {
-    if (!text) return "";
+    if (text === null || text === undefined) return "";
     return String(text)
         .replace(/&/g, "&amp;")
         .replace(/</g, "&lt;")
@@ -142,19 +169,39 @@ function escapeHtml(text) {
 }
 
 /**
+ * Show a loading row while the leaderboard is fetched
+ */
+function renderLeaderboardLoading() {
+    const tbody = document.getElementById('leaderboard-body');
+    if (!tbody) return;
+
+    tbody.innerHTML = `
+        <tr class="lb-loading">
+            <td colspan="6"><span class="lb-loading__horse">🐴</span><br>Sir Galoppino holt die Bestenliste...</td>
+        </tr>
+    `;
+}
+
+/**
  * Render the leaderboard table
  */
 function renderLeaderboard(entries) {
     const tbody = document.getElementById('leaderboard-body');
     if (!tbody) return;
 
+    if (!entries.length) {
+        const message = leaderboardLoadFailed
+            ? '<span class="lb-empty__icon">📡</span>Die Bestenliste ist gerade nicht erreichbar. Versuch es später nochmal!'
+            : '<span class="lb-empty__icon">🏇</span>Noch keine Einträge – sei der Erste!';
+        tbody.innerHTML = `<tr class="lb-empty"><td colspan="6">${message}</td></tr>`;
+        return;
+    }
+
     const topEntries = entries.slice(0, 50);
     let alreadyHighlighted = false; // Track if we've already highlighted one entry
 
     tbody.innerHTML = topEntries.map((entry, index) => {
         const rank = index + 1;
-        let rankDisplay = rank;
-        let rankClass = '';
         let isHighlighted = false;
 
         // Check if this is the just-saved entry (within last 30 seconds) - only highlight ONE entry
@@ -168,16 +215,9 @@ function renderLeaderboard(entries) {
             alreadyHighlighted = true; // Don't highlight any more entries
         }
 
-        if (rank === 1) {
-            rankDisplay = `🥇 ${rank}`;
-            rankClass = 'rank-1';
-        } else if (rank === 2) {
-            rankDisplay = `🥈 ${rank}`;
-            rankClass = 'rank-2';
-        } else if (rank === 3) {
-            rankDisplay = `🥉 ${rank}`;
-            rankClass = 'rank-3';
-        }
+        const medals = { 1: '🥇', 2: '🥈', 3: '🥉' };
+        const rankDisplay = medals[rank] || rank;
+        const rankClass = rank <= 3 ? `rank-${rank}` : '';
 
         // Format date
         let dateStr = entry.date || '';
@@ -197,20 +237,28 @@ function renderLeaderboard(entries) {
 
         // Mode display (using difficulty field for now)
         const mode = entry.difficulty || entry.mode || '-';
-        const modeIcon = mode.toLowerCase() === 'speedrun' ? '⏱️' : '🎯';
+        const modeIcon = String(mode).toLowerCase() === 'speedrun' ? '⏱️' : '🎯';
         const safeMode = `${modeIcon} ${escapeHtml(mode)}`;
 
-        const rowClass = isHighlighted ? 'highlighted-row' : '';
+        const rowClasses = [];
+        if (rank <= 3) rowClasses.push(`podium-${rank}`);
+        if (isHighlighted) rowClasses.push('highlighted-row');
+        const delay = Math.min(index, 15) * 30;
 
         return `
-            <tr class="${rowClass}">
-                <td class="${rankClass}" style="font-size: 1.1em;">${rankDisplay}</td>
-                <td style="font-weight: 500">${safeName}</td>
-                <td style="font-weight: bold">${safeScore}</td>
-                <td style="color: #6b7280">${safeMoves}</td>
-                <td>${safeMode}</td>
-                <td style="font-size: 0.85em; color: #9ca3af">${safeDate}</td>
+            <tr class="${rowClasses.join(' ')}" style="animation-delay: ${delay}ms">
+                <td class="${rankClass}"><span class="rank-badge">${rankDisplay}</span></td>
+                <td class="lb-name" title="${safeName}">${safeName}</td>
+                <td class="lb-score">${safeScore}</td>
+                <td class="lb-moves">${safeMoves}</td>
+                <td class="lb-mode">${safeMode}</td>
+                <td class="lb-date col-date">${safeDate}</td>
             </tr>
         `;
     }).join('');
+
+    const highlighted = tbody.querySelector('.highlighted-row');
+    if (highlighted && highlighted.scrollIntoView) {
+        highlighted.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
+    }
 }
