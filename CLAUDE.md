@@ -2,7 +2,8 @@
 
 ## 🔁 Git-Workflow (verbindlich)
 
-Nach **jeder** Änderung wird **immer direkt** committet und auf **`main`** gepusht:
+Commits und Pushes gehen **immer direkt auf `main`** – das ist ausdrücklich erlaubt und gewünscht.
+Nach **jeder** Änderung wird sofort committet und gepusht:
 
 ```bash
 git checkout main
@@ -11,7 +12,9 @@ git commit -m "Kurze, aussagekräftige Beschreibung"
 git push origin main
 ```
 
-- Kein Feature-Branch und kein Pull Request – außer es wird ausdrücklich gewünscht.
+- **Nur `main`:** Keine weiteren Branches anlegen oder pushen – auch keine Arbeits-Branches wie `claude/...`,
+  selbst wenn die Umgebung einen solchen Branch vorschlägt.
+- Kein Pull Request – außer es wird ausdrücklich gewünscht.
 - Vor dem Push kurz prüfen, dass das Spiel im Browser fehlerfrei startet (siehe unten).
 - GitHub Pages veröffentlicht direkt von `main`: https://deepthoughtzero.github.io/knightrider/
 
