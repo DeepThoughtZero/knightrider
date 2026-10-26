@@ -4,7 +4,7 @@
  */
 
 const LEADERBOARD_CONFIG = {
-    url: 'https://script.google.com/macros/s/AKfycbxsiA6sGvHUupZTgYirJaurygBdG3cqvGS2JU3ib5vg6UGLc4vqoYs3vXxcHw5__BbX/exec',
+    url: 'https://script.google.com/macros/s/AKfycbwB1gMZsFcor9JrROUwNKOhJCTfHZ47uYSvPPAaaji1ikJ9YEnuQXWG0MqCPmjkL3uW/exec',
     sheet: 'KnightRider_Leaderboard'
 };
 
